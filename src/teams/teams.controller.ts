@@ -19,4 +19,24 @@ export class TeamsController {
   findAll(): Promise<Team[]> {
     return this.teamsService.findAll();
   }
+
+  @Get(':id')
+  findOne(@Param('id') id): Promise<Team> {
+    return this.teamsService.findOne(id);
+  }
+
+  @Post()
+  create(@Body() createTeamDto: CreateTeamDto): Promise<Team> {
+    return this.teamsService.create(createTeamDto);
+  }
+
+  @Delete(':id')
+  delete(@Param('id') id): Promise<Team> {
+    return this.teamsService.delete(id);
+  }
+
+  @Put(':id')
+  update(@Param('id') id, @Body() createTeamDto: CreateTeamDto): Promise<Team> {
+    return this.teamsService.update(id, createTeamDto);
+  }
 }

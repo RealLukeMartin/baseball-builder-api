@@ -4,7 +4,7 @@ export enum EPositionGroup {
   'OF',
 }
 
-export enum ESpecificPostion {
+export enum EPosition {
   'SP',
   'MRP',
   'LRP',

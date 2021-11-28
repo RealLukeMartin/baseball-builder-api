@@ -14,7 +14,7 @@ export const PlayerSchema = new mongoose.Schema({
     type: String,
     enum: ['P', 'IF', 'OF'],
   },
-  specificPosition: {
+  position: {
     type: String,
     enum: [
       'SP',

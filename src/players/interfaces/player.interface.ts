@@ -1,4 +1,4 @@
-import { EPositionGroup, ESpecificPostion } from '../enums/player.enum';
+import { EPositionGroup, EPosition } from '../enums/player.enum';
 
 export interface IPlayer {
   id?: string;
@@ -6,7 +6,7 @@ export interface IPlayer {
   lastName: string;
   age?: number;
   positionGroup?: EPositionGroup;
-  specificPosition?: ESpecificPostion;
+  specificPosition?: EPosition;
   battingAverage?: number;
   ERA?: number;
   currentTeamId?: string;

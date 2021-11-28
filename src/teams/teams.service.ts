@@ -1,31 +1,31 @@
 import { Injectable } from '@nestjs/common';
-import { Team } from './interfaces/team.interface';
+import { ITeam } from './interfaces/team.interface';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 
 @Injectable()
 export class TeamsService {
-  constructor(@InjectModel('Team') private readonly teamModel: Model<Team>) {}
+  constructor(@InjectModel('Team') private readonly teamModel: Model<ITeam>) {}
 
-  async findAll(): Promise<Team[]> {
+  async findAll(): Promise<ITeam[]> {
     return await this.teamModel.find();
   }
 
-  async findOne(id: string): Promise<Team> {
+  async findOne(id: string): Promise<ITeam> {
     return await this.teamModel.findOne({ _id: id });
   }
 
-  async create(team: Team): Promise<Team> {
+  async create(team: ITeam): Promise<ITeam> {
     const newTeam = new this.teamModel(team);
 
     return await newTeam.save();
   }
 
-  async delete(id: string): Promise<Team> {
+  async delete(id: string): Promise<ITeam> {
     return await this.teamModel.findByIdAndRemove(id);
   }
 
-  async update(id: string, team: Team): Promise<Team> {
+  async update(id: string, team: ITeam): Promise<ITeam> {
     return await this.teamModel.findByIdAndUpdate(id, team, { new: true });
   }
 }

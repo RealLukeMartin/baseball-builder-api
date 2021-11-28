@@ -7,7 +7,7 @@ import {
   Body,
   Param,
 } from '@nestjs/common';
-import { Team } from './interfaces/team.interface';
+import { ITeam } from './interfaces/team.interface';
 import { CreateTeamDto } from './dto/create-team.dto';
 import { TeamsService } from './teams.service';
 
@@ -16,27 +16,30 @@ export class TeamsController {
   constructor(private readonly teamsService: TeamsService) {}
 
   @Get()
-  findAll(): Promise<Team[]> {
+  findAll(): Promise<ITeam[]> {
     return this.teamsService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id): Promise<Team> {
+  findOne(@Param('id') id): Promise<ITeam> {
     return this.teamsService.findOne(id);
   }
 
   @Post()
-  create(@Body() createTeamDto: CreateTeamDto): Promise<Team> {
+  create(@Body() createTeamDto: CreateTeamDto): Promise<ITeam> {
     return this.teamsService.create(createTeamDto);
   }
 
   @Delete(':id')
-  delete(@Param('id') id): Promise<Team> {
+  delete(@Param('id') id): Promise<ITeam> {
     return this.teamsService.delete(id);
   }
 
   @Put(':id')
-  update(@Param('id') id, @Body() createTeamDto: CreateTeamDto): Promise<Team> {
+  update(
+    @Param('id') id,
+    @Body() createTeamDto: CreateTeamDto,
+  ): Promise<ITeam> {
     return this.teamsService.update(id, createTeamDto);
   }
 }

@@ -10,7 +10,7 @@ export const PlayerSchema = new mongoose.Schema({
     type: String,
   },
   age: Number,
-  positonGroup: {
+  positionGroup: {
     type: String,
     enum: ['P', 'IF', 'OF'],
   },
@@ -33,5 +33,5 @@ export const PlayerSchema = new mongoose.Schema({
   },
   battingAverage: Number,
   ERA: Number,
-  // Todo: Add team assignment:: currentTeamId: { type: mongoose.Schema.Types.ObjectId, ref: 'Team' },
+  currentTeamId: { type: mongoose.Schema.Types.ObjectId, ref: 'Team' },
 });

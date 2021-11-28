@@ -5,8 +5,9 @@ export interface IPlayer {
   firstName: string;
   lastName: string;
   age?: number;
-  positonGroup?: EPositionGroup;
+  positionGroup?: EPositionGroup;
   specificPosition?: ESpecificPostion;
   battingAverage?: number;
   ERA?: number;
+  currentTeamId?: string;
 }

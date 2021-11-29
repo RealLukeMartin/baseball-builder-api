@@ -10,5 +10,8 @@ import { PlayerSchema } from './schemas/player.schema';
   ],
   controllers: [PlayersController],
   providers: [PlayersService],
+  exports: [
+    MongooseModule.forFeature([{ name: 'Player', schema: PlayerSchema }]),
+  ],
 })
 export class PlayersModule {}

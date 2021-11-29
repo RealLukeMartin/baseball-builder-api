@@ -8,11 +8,16 @@ export class TeamsService {
   constructor(@InjectModel('Team') private readonly teamModel: Model<ITeam>) {}
 
   async findAll(): Promise<ITeam[]> {
-    return await this.teamModel.find();
+    const teams = await this.teamModel.find().populate({
+      path: 'players',
+    });
+    return teams;
   }
 
   async findOne(id: string): Promise<ITeam> {
-    return await this.teamModel.findOne({ _id: id });
+    return await this.teamModel.findOne({ _id: id }).populate({
+      path: 'players',
+    });
   }
 
   async create(team: ITeam): Promise<ITeam> {

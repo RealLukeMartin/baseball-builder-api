@@ -31,7 +31,48 @@ export const PlayerSchema = new mongoose.Schema({
       'CF',
     ],
   },
-  battingAverage: Number,
-  ERA: Number,
+  hittingArm: {
+    type: String,
+    enum: ['left', 'right', 'switch'],
+  },
+  throwingArm: {
+    type: String,
+    enum: ['left', 'right', 'switch'],
+  },
+  levels: {
+    hitting: {
+      type: Number,
+      min: 0,
+      max: 100,
+    },
+    pitching: {
+      type: Number,
+      min: 0,
+      max: 100,
+    },
+  },
+  stats: {
+    fielding: {
+      E: Number,
+    },
+    hitting: {
+      PA: Number,
+      H: Number,
+      BB: Number,
+      SF: Number,
+      HBP: Number,
+      TB: Number,
+      '1B': Number,
+      '2B': Number,
+      '3B': Number,
+      HR: Number,
+    },
+    pitching: {
+      IP: Number,
+      K: Number,
+      BB: Number,
+      R: Number,
+    },
+  },
   currentTeamId: { type: mongoose.Schema.Types.ObjectId, ref: 'Team' },
 });

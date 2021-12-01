@@ -18,3 +18,9 @@ export enum EPosition {
   'RF',
   'CF',
 }
+
+export enum EArm {
+  'left',
+  'right',
+  'switch',
+}

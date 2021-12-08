@@ -83,5 +83,5 @@ jobs:
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
           task-definition: ${{ steps.update-task-def.outputs.task-definition }}
-          service: aws-ecs-typescript-svc
+          service: aws-ecs-typescript-service
           cluster: baseball-builder-api

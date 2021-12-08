@@ -20,6 +20,8 @@ RUN addgroup -g 1001 -S nodejs
 RUN adduser -S nodejs -u 1001
 
 COPY --from=builder /app/dist ./dist
+# Fix this later: pull env vars on runtime
+COPY --from=builder /app/.env ./.env
 COPY --from=builder /app/package.json ./package.json
 COPY --from=builder /app/yarn.lock ./yarn.lock
 RUN yarn install --production=true

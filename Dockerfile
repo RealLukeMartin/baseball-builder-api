@@ -28,4 +28,4 @@ USER nodejs
 
 EXPOSE 4000
 
-CMD ["yarn", "start"]
+CMD ["node", "dist/main"]

@@ -132,7 +132,7 @@ jobs:
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
           task-definition: ${{ steps.update-task-def.outputs.task-definition }}
-          service: baseball-builder-service
+          service: aws-ecs-typescript-service
           cluster: baseball-builder-api
 
 

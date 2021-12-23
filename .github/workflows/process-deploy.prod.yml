@@ -6,11 +6,60 @@ on:
     branches:
       - main
 
-name: Deploy to Amazon ECS
+name: Production Workflow
 
 jobs:
+  run-linters:
+    name: Run Linters
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14
+
+      - name: Install Node.js dependencies
+        run: yarn ci
+
+      - name: Run ESLint
+        run: yarn lint
+
+  run-tests:
+    name: Run Tests
+    needs: run-linters
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out Git repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: 14
+
+    - name: Install Node.js dependencies
+      run: yarn ci
+
+    - name: Run Tests
+      run: yarn test
+    
+  notify-team-pre-deployment:
+    name: Notify Team of Deploy
+    needs: run-tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Notify
+        run: echo 'This step will notify team a deployment to production has started in slack and/or email'
+
   deploy:
     name: Deploy to ECS
+    needs: run-tests
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -83,5 +132,15 @@ jobs:
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
           task-definition: ${{ steps.update-task-def.outputs.task-definition }}
-          service: aws-ecs-typescript-service
+          service: baseball-builder-service
           cluster: baseball-builder-api
+
+
+  notify-team-post-deployment:
+    name: Notify Team Deploy Complete
+    needs: deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Notify
+        run: echo 'This step will notify team a deployment to production has completed'

@@ -1,0 +1,46 @@
+name: Process PR
+on:
+  pull_request:
+    branches:
+      - development
+    types: [opened, reopened, synchronize]
+
+jobs:
+  run-linters:
+    name: Run Linters
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14
+
+      - name: Install Node.js dependencies
+        run: yarn ci
+
+      - name: Run ESLint
+        run: yarn lint
+
+  run-tests:
+    name: Run Tests
+    needs: run-linters
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out Git repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: 14
+
+    - name: Install Node.js dependencies
+      run: yarn ci
+
+    - name: Run Tests
+      run: yarn test
